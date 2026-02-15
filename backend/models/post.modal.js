@@ -29,10 +29,10 @@ const PostSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
-    fileType:{
+    fileType:[{
         type: String,
         default: ''
-    }
+    }]
 });
 
 const Post = mongoose.model("Post", PostSchema)

@@ -63,6 +63,12 @@
     cursor: pointer;
 }
 
+.buttonWithOutline:hover{
+    background: rgb(82, 128, 242);
+    border: 2px solid rgb(174, 174, 239);
+    box-shadow: 2px 3px 10px 3px rgb(174, 174, 239);
+}
+
 .cardContainer_right{
     flex: 0.4;
     background: rgb(37, 103, 164);

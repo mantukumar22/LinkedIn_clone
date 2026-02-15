@@ -15,7 +15,7 @@ function LoginComponent() {
 
   const router = useRouter();
 
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const [userLoginMethod, setUserLoginMethod] = useState(false);
 
@@ -24,11 +24,6 @@ function LoginComponent() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
 
-  useEffect(() => {
-    if (authState.loggedIn) {
-      router.push("/dashboard")
-    }
-  }, [authState.loggedIn])
 
   useEffect(() => {
     if(localStorage.getItem("token")){
@@ -37,17 +32,27 @@ function LoginComponent() {
   }, [])
 
   useEffect(() => {
-      dispath(emptyMessage())
+    if (authState.loggedIn) {
+      router.push("/dashboard")
+    }
+  }, [authState.loggedIn])
+
+    
+  useEffect(() => {
+      dispatch(emptyMessage())
   }, [userLoginMethod])
+
+
+  
 
   const handleRegister = () => {
     console.log("registering")
-    dispath(registerUser({ username, password, email, name }))
+    dispatch(registerUser({ username, password, email, name }))
   }
 
   const handleLogin = () => {
     console.log("Login")
-    dispath(loginUser({ email, password }))
+    dispatch(loginUser({ email, password }))
   }
 
 
@@ -59,7 +64,7 @@ function LoginComponent() {
             <div className={styles.cardContainer_left}>
 
               <p className={styles.cardleft_heading} >{userLoginMethod ? "Sign In" : "Sign Up"}</p>
-              <p style={{ color: authState.isError ? "red" : "green" }}>{authState.message.message}</p>
+              <br /><p style={{ color: authState.isError ? "red" : "green" }}>{authState.message.message}</p>
               <div className={styles.inputContainer}>
 
                 {!userLoginMethod &&

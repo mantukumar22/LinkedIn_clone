@@ -37,9 +37,43 @@ export const registerUser = createAsyncThunk(
                 email: user.email,
                 name: user.name,
             })
+            return thunkAPI.fulfillWithValue(response.data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
      }
 
+)
+
+export const getAboutUser = createAsyncThunk(
+    "user/getAboutUser",
+    async (user, thunkAPI) => {
+        try {
+
+            const response = await clientServer.get("/get_user_and_profile",{
+               params:{
+                 token: user.token
+               }
+            })
+            return thunkAPI.fulfillWithValue(response.data)
+            
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response.data)
+        }
+    }
+)
+
+export const getAllUsers = createAsyncThunk(
+    "user/getAllUsers",
+    async (_, thunkAPI) => {
+        try {
+
+            const response = await clientServer.get("/user/get_all_users")
+
+            return thunkAPI.fulfillWithValue(response.data)
+            
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response.data)
+        }
+    }
 )
