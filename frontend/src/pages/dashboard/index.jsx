@@ -1,5 +1,5 @@
 import { getAboutUser, getAllUsers } from '@/config/redux/action/authAction';
-import { createPost, deletePost, getAllComments, getAllPosts, incrementPostLike } from '@/config/redux/action/postAction';
+import { createPost, deletePost, getAllComments, getAllPosts, incrementPostLike, postComment } from '@/config/redux/action/postAction';
 import DashBoardLayout from '@/layout/DashboardLayout';
 import UserLayout from '@/layout/UserLayout';
 import { useRouter } from 'next/router'
@@ -36,6 +36,7 @@ export default function Dashboard() {
 
     const [postContent, setPostContent] = useState("");
     const [fileContent, setFileContent] = useState();
+    const [commentText, setCommentText] = useState("");
 
     const handleUpload = async () => {
 
@@ -175,19 +176,41 @@ export default function Dashboard() {
                                 className={styles.allCommentsContainer}>
                                 {postState.comments.length === 0 && <h2> No Comments</h2>}
 
+                                {postState.comments.length !== 0 &&
+
+                                    <div>
+                                        {postState.comments.map((comment, index) => {
+                                            return (
+                                                
+                                                <div className={styles.singleComment} key={comment._id} >
+                                                    <img src={`${BASE_URL}/${comment.userId.profilePicture}`} alt="" />
+                                                    <div>
+                                                        <p style={{ fontWeight: 'bold', fontSize: "1.2rem " }} >{comment.userId.name}</p>
+                                                        <p>@{comment.userId.username}</p>
+
+                                                    </div>
+                                                    <p>{comment.body}</p>
+                                                </div>
+
+                                            )
+                                        })}
+
+                                    </div>
+
+                                }
 
                                 <div className={styles.postCommentsContainer} >
                                     <input type="" value={commentText} onChange={(e) => setCommentText(e.target.value)} placeholder='Comment' />
                                     <div onClick={async () => {
-                                        await dispatch(postComment({ post_id: postState.postId, body: commentText}))
+                                        await dispatch(postComment({ post_id: postState.postId, body: commentText }))
                                         await dispatch(getAllComments({ post_id: postState.postId }))
                                     }} className={styles.postCommentsContainer_commentBtn}>
                                         <p>Comment</p>
                                     </div>
                                 </div>
-                            
-                            
-                            
+
+
+
                             </div>
 
                         </div>

@@ -7,7 +7,8 @@ import PDFDocument from 'pdfkit';
 import fs from "fs";
 import { connections } from "mongoose";
 import ConnectionRequest from "../models/connection.model.js";
-import Post from "../models/post.modal.js";
+import Post from "../models/post.modal.js"; 
+import Comment from "../models/comments.modal.js"
 
 const convertUserDataTOPDF = async (userData) => {
     const doc = new PDFDocument();
@@ -212,7 +213,7 @@ export const DownloadProfile = async (req, res) => {
     const userProfile = await Profile.findOne({ userId: user_id })
         .populate('userId', 'name username email profilePicture');
 
-    let a = await convertUserDataTOPDF(userProfile);
+    let outputPath = await convertUserDataTOPDF(userProfile);
 
     return res.json({ "message": outputPath})
 }
@@ -259,7 +260,7 @@ export const sendConnectionRequest = async (req, res) => {
 }
 
 export const getMyConnectionsRequests = async (req, res) => {
-    const { token } = req.body;
+    const { token } = req.query;
 
     try {
 
@@ -269,8 +270,8 @@ export const getMyConnectionsRequests = async (req, res) => {
             return res.status(404).json({ message: "User not found"})
         }
 
-        const connection = await ConnectionRequest.findOne({ userId: user._id})
-            .populate('connection', 'name username email profilePicture')
+        const connections = await ConnectionRequest.find({ userId: user._id})
+            .populate('connectionId', 'name username email profilePicture')
 
         return res.json({ connections })
 
@@ -330,7 +331,7 @@ export const acceptConnectionRequest = async (req, res) => {
 
         await connection.save();
         return res.json({ message: "Request Updated"})
-    } catch (error) {
+    } catch (err) {
         return res.status(500).json({ message: err.message })
     }
 }
@@ -357,13 +358,37 @@ export const commentPost = async (req, res) => {
         const comment = new Comment({
             userId: user._id,
             postId: post_id,
-            comment: commentBody
+            body: commentBody
         })
 
         await comment.save();
 
         return res.status(200).json({ message: "Comment Added"})
-    } catch (error) {
+    } catch (err) {
+        return res.status(500).json({ message : err.message })
+    }
+}
+
+
+export const getUserProfileAndUserBasedOnUsername = async (req, res) => {
+
+    const { username } = req.query;
+
+    try {
+        const user = await User.findOne({
+            username
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found"})
+        }
+
+        const userProfile = await Profile.findOne({ userId: user._id})
+            .populate('userId', 'name username email profilePicture');
+
+        return res.json({ "profile": userProfile })
+
+    } catch (err) {
         return res.status(500).json({ message : err.message })
     }
 }
