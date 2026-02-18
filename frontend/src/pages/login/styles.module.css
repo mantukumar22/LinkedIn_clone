@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     justify-content: center;
     height: 90svh;
@@ -7,7 +7,7 @@
 }
 
 
-.cardContainer{
+.cardContainer {
     height: 80vh;
     display: flex;
     border-radius: 10px;
@@ -17,27 +17,27 @@
     box-shadow: 10px 10px 10px rgb(201, 197, 197);
 }
 
-.cardContainer_left{
+.cardContainer_left {
     flex: 0.6;
     padding: 2rem;
     text-align: center;
 }
 
-.cardleft_heading{
+.cardleft_heading {
     font-weight: bold;
-    font-size: 1.8rem;    
+    font-size: 1.8rem;
 }
 
-.inputField{
+.inputField {
     padding-inline: 1.3rem;
-    padding-block:0.8rem ;
+    padding-block: 0.8rem;
     outline: none;
     border-radius: 10px;
     border: 1px solid rgb(168, 166, 166);
     width: 100%;
 }
 
-.inputContainer{
+.inputContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,13 +48,13 @@
     gap: 1.5rem;
 }
 
-.inputRow{
+.inputRow {
     width: fit-content;
     display: flex;
     gap: 1.2rem;
 }
 
-.buttonWithOutline{
+.buttonWithOutline {
     padding: 0.8rem 1.3rem;
     background: rgb(133, 166, 250);
     border: 2px solid rgb(107, 107, 248);
@@ -63,13 +63,13 @@
     cursor: pointer;
 }
 
-.buttonWithOutline:hover{
+.buttonWithOutline:hover {
     background: rgb(82, 128, 242);
     border: 2px solid rgb(174, 174, 239);
     box-shadow: 2px 3px 10px 3px rgb(174, 174, 239);
 }
 
-.cardContainer_right{
+.cardContainer_right {
     flex: 0.4;
     background: rgb(37, 103, 164);
     color: aliceblue;
@@ -83,3 +83,10 @@
     padding-inline: 1.2rem;
 }
 
+@media only screen and (max-width: 600px) {
+    .cardContainer {
+        /* height: 80vh; */
+        display: flex;
+        flex-direction: column;
+    }
+}

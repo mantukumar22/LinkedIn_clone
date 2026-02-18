@@ -148,9 +148,9 @@ export const updateUserProfile = async (req, res) => {
 
         await user.save();
 
-        return res.status(500).json({ message: error.message})
+        return res.json({message: " updated"})
     }catch(error) {
-        return res.status(500).json({message: message})
+        return res.status(500).json({message: error.message})
     }
 }
 
@@ -198,7 +198,7 @@ export const updatteProfileData = async (req, res) => {
 
 export const getAllUserProfile = async  (req, res) => {
     try {
-        const profiles = await Profile.find().populate('userId', 'name username exmail profilepPicture');
+        const profiles = await Profile.find().populate('userId', 'name username email profilePicture');
 
         return res.json({ profiles })
     } catch (error){
@@ -285,7 +285,7 @@ export const getMyConnectionsRequests = async (req, res) => {
 
 export const whatAreMyConnections = async (req, res) => {
 
-    const { token } = req.body;
+    const { token } = req.query;
 
     try {
         const user = await User.findOne({ token });

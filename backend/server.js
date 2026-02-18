@@ -6,13 +6,14 @@ import userRoutes from "./routes/user.routes.js";
 import mongoose from 'mongoose';
 
 
+
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(postRoutes);
 app.use(userRoutes);
-app.use(express.static("uploads"))
+app.use("/uploads", express.static("uploads"));
 
 
 

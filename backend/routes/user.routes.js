@@ -5,8 +5,8 @@ import { uploadProfilePicture } from "../controllers/user.controller.js";
 const router = Router();
 
 const storage = multer.diskStorage({
-    distination: (req, file, cb) => {
-        cd(null, 'uploads/')
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)
@@ -20,7 +20,7 @@ router.route("/update_profile_picture")
 
 router.route('/register').post(register)
 router.route('/login').post(login)
-router.route("/user_updatess").post(updateUserProfile)
+router.route("/user_update").post(updateUserProfile)
 router.route("/get_user_and_profile").get(getUserAndProfile)
 router.route("/update_profile_data").post(updatteProfileData)
 router.route("/user/get_all_users").get(getAllUserProfile)

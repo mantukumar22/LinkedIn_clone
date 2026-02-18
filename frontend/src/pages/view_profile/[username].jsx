@@ -7,7 +7,7 @@ import styles from "./index.module.css"
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '@/config/redux/action/postAction';
-import { getConnectionsRequest, sendConnectionRequest } from '@/config/redux/action/authAction';
+import { getConnectionsRequest, getMyConnectionRequests, sendConnectionRequest } from '@/config/redux/action/authAction';
 
 export default function ViewProfilePage({ userProfile }) {
 
@@ -25,7 +25,8 @@ export default function ViewProfilePage({ userProfile }) {
 
   const getUserPost = async () => {
     await dispatch(getAllPosts());
-    await dispatch(getConnectionsRequest({ token: localStorage.getItem("token") }))
+    await dispatch(getConnectionsRequest({ token: localStorage.getItem("token") }));
+    await dispatch(getMyConnectionRequests({ token: localStorage.getItem("token")}));
   }
 
   useEffect(() => {
@@ -39,14 +40,21 @@ export default function ViewProfilePage({ userProfile }) {
   }, [postReducer.posts])
 
   useEffect(() => {
-    console.log(authState.connections, userProfile.userId._id)
+    // console.log(authState.connections, userProfile.userId._id)
     if (authState.connections.some(user => user.connectionId._id === userProfile.userId._id)) {
       setIsCurrentUserInConnection(true)
       if (authState.connections.find(user => user.connectionId._id === userProfile.userId._id).status_accepted === true) {
         setIsConnectionNull(false)
       }
     }
-  }, [authState.connections])
+
+    if (authState.connectionRequest.some(user => user.userId._id === userProfile.userId._id)) {
+      setIsCurrentUserInConnection(true)
+      if (authState.connectionRequest.find(user => user.userId._id === userProfile.userId._id).status_accepted === true) {
+        setIsConnectionNull(false)
+      }
+    }
+  }, [authState.connections, authState.connectionRequest])
 
 
 
@@ -64,7 +72,7 @@ export default function ViewProfilePage({ userProfile }) {
 
         <div className={styles.container}>
           <div className={styles.backDropContainer}>
-            <img className={styles.backDrop} src={`${BASE_URL}/${userProfile.userId.profilePicture}`} alt="" />
+            <img className={styles.backDrop} src={`${BASE_URL}/uploads/${userProfile.userId.profilePicture}`} alt="" />
           </div>
 
           <div className={styles.profileContainer_details}>
@@ -112,7 +120,7 @@ export default function ViewProfilePage({ userProfile }) {
                       <div className={styles.card} >
 
                         <div className={styles.card_profileContainer} >
-                          {post.media !== "" ? <img src={`${BASE_URL}/${post.media}`} alt='' />
+                          {post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`} alt='' />
                             :
                             <div style={{ width: "3.4rem", height: "3.4rem" }} > </div>}
                         </div>
@@ -134,7 +142,7 @@ export default function ViewProfilePage({ userProfile }) {
                 userProfile.pastWork.map((work, index) => {
                   return (
                     <div key={index} className={styles.workHistoryCard} >
-                      <p style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem" }} >{work.company} - {WEBPACK_RESOURCE_QUERIES.position}</p>
+                      <p style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem" }} >{work.company} - {work.position}</p>
                       <p>{work.years}</p>
                     </div>
                   )

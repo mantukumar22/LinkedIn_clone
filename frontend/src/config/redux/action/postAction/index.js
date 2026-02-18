@@ -32,9 +32,10 @@ export const createPost = createAsyncThunk(
 
             const response = await clientServer.post("/post", formData, {
                 headers: {
-                    'Content-Type': 'multipart/from-data'
+                    'Content-Type': 'multipart/form-data'
                 }
             });
+            // const response = await clientServer.post("/post", formData);
 
             if (response.status === 200){
                 return thunkAPI.fulfillWithValue("Post Uploaded")

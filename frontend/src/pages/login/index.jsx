@@ -26,7 +26,7 @@ function LoginComponent() {
 
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       router.push("/dashboard")
     }
   }, [])
@@ -37,13 +37,16 @@ function LoginComponent() {
     }
   }, [authState.loggedIn])
 
-    
+
   useEffect(() => {
-      dispatch(emptyMessage())
+    dispatch(emptyMessage())
   }, [userLoginMethod])
 
 
-  
+useEffect(() => {
+  console.log("AUTH STATE:", authState)
+}, [authState])
+
 
   const handleRegister = () => {
     console.log("registering")
@@ -64,7 +67,11 @@ function LoginComponent() {
             <div className={styles.cardContainer_left}>
 
               <p className={styles.cardleft_heading} >{userLoginMethod ? "Sign In" : "Sign Up"}</p>
-              <br /><p style={{ color: authState.isError ? "red" : "green" }}>{authState.message.message}</p>
+              {authState.message && (
+                <p style={{ color: authState.isError ? "red" : "green" }}>
+                  {authState.message}
+                </p>
+              )}
               <div className={styles.inputContainer}>
 
                 {!userLoginMethod &&
@@ -73,9 +80,9 @@ function LoginComponent() {
                     <input onChange={(e) => setName(e.target.value)} className={styles.inputField} type="text" placeholder='Name' />
                   </div>
                 }
-                <input onChange={(e) => setPassword(e.target.value)} className={styles.inputField} type="text" placeholder='Email' />
-                <input onChange={(e) => setEmailAddress(e.target.value)} className={styles.inputField} type="text" placeholder='Password' />
-                
+                <input onChange={(e) => setEmailAddress(e.target.value)} className={styles.inputField} type="email" placeholder='Email' />
+                <input  onChange={(e) => setPassword(e.target.value)}  className={styles.inputField} type="password" placeholder='Password' />
+
 
                 <div onClick={() => {
                   if (userLoginMethod) {
@@ -93,14 +100,14 @@ function LoginComponent() {
 
 
             <div className={styles.cardContainer_right}>
-              
-                {userLoginMethod ? <p>Don't Have an Account?</p> : <p>Already Have an Account?</p> }
-                <div onClick={() => {
-                  setUserLoginMethod(!userLoginMethod)
-                }} style={{color: "black"}} className={styles.buttonWithOutline} >
-                  <p>{userLoginMethod ? "Sign Up" : "Sign In "} </p>
-                </div>
-              
+
+              {userLoginMethod ? <p>Don't Have an Account?</p> : <p>Already Have an Account?</p>}
+              <div onClick={() => {
+                setUserLoginMethod(!userLoginMethod)
+              }} style={{ color: "black" }} className={styles.buttonWithOutline} >
+                <p>{userLoginMethod ? "Sign Up" : "Sign In "} </p>
+              </div>
+
             </div>
           </div>
         </div>

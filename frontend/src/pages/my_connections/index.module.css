@@ -1,0 +1,57 @@
+.userCard{
+    display: flex;
+    width: 100%;
+    gap: 1.2rem;
+    padding: 1.3rem;
+    align-items: center;
+    border-radius: 10px;
+    width: 50rem;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.469);
+}
+
+.profilePicture  > img{
+    width: 6.5rem;
+    border-radius: 50%;
+}
+
+.MyConnections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+
+.connectedButton{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgb(247, 248, 250);
+    outline: none;
+    width: 100px;
+    border: 2px solid rgb(6, 156, 211);
+    color:rgb(20, 144, 239);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.connectedButton:hover{
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    background: rgb(41, 112, 255);
+    outline: none;
+    width: 100px;
+    border: 2px solid rgb(6, 156, 211);
+    color:rgb(255, 255, 255);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .userCard {
+        width: 100vw;
+    }
+}

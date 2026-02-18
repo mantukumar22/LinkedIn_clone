@@ -26,7 +26,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.mainContainer_right}>
-            <img src="homeimg.jpg" alt="homeimg" />
+            <img src="images/homeimg.jpg" alt="homeimg" />
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const postSlice = createSlice({
                 state.isError = false;
                 state.postFetched = true;
                 state.posts = action.payload.posts.reverse()
-                console.log('HERE', state.posts)
+                // console.log('HERE', state.posts)
             })
             .addCase(getAllPosts.rejected, (state, action) => {
                 state.isLoading = false;

@@ -1,0 +1,29 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: rgb(143, 230, 230);
+    z-index: 10;
+    margin-bottom: 1rem;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .navbar {
+        width: 161%;
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .navbar {
+        width: 105%;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .navbar {
+        width: 150%;
+    }
+
+}

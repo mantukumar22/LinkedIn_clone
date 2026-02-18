@@ -1,11 +1,11 @@
-.scrollComponent{
+.scrollComponent {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
 }
 
-.createPostContainer{
+.createPostContainer {
     display: flex;
     padding-inline: 0.8rem;
     height: 8svh;
@@ -17,7 +17,7 @@
     position: relative;
 }
 
-.userProfile{
+.userProfile {
     width: 50px;
     height: 50px;
     background-color: rgb(5, 93, 131);
@@ -25,7 +25,7 @@
     border: 2px solid black;
 }
 
-.uploadButton{
+.uploadButton {
     position: absolute;
     right: 20;
     bottom: -50%;
@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 
-.Fab{
+.Fab {
     width: fit-content;
     height: fit-content;
     background-color: rgb(5, 93, 131);
@@ -54,7 +54,7 @@
 }
 
 
-.textAreaOfContent{
+.textAreaOfContent {
     width: 80%;
     height: 70%;
     padding-inline: 1.5rem;
@@ -62,21 +62,21 @@
     font-size: 12px;
     color: black;
     /* border: none; */
-    background-color:  rgb(162, 216, 240);
+    background-color: rgb(162, 216, 240);
     border: 1px solid rgb(30, 30, 30);
     border-radius: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .singleCard {
-    /* background-color: rgb(246, 241, 235); */ 
+    /* background-color: rgb(246, 241, 235); */
     margin-top: 1px;
     width: 100%;
     /* border-radius: 10px; */
     border-bottom: 1px solid rgb(95, 176, 247);
 }
 
-.singleCard_profileContainer{
+.singleCard_profileContainer {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
@@ -85,32 +85,33 @@
     width: 100%;
 }
 
-.singleCard_image img{
+.singleCard_image img {
     border-radius: 10px;
     width: 500px;
 }
 
-.optionsContainer{
+.optionsContainer {
     display: flex;
     justify-content: space-between;
     height: 20%;
     width: 100%;
 }
 
-.singleOption_optionsContainer{
+.singleOption_optionsContainer {
     display: flex;
     align-items: center;
     gap: 0.2rem;
     justify-content: center;
 }
 
-.singleOption_optionsContainer > svg{
+.singleOption_optionsContainer>svg {
     height: 80%;
     width: 30px;
     cursor: pointer;
+    min-width: 1rem;
 }
 
-.commentsContainer{
+.commentsContainer {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -121,10 +122,10 @@
     overflow: hidden;
     justify-content: center;
     display: flex;
-    align-items: center;    
+    align-items: center;
 }
 
-.allCommentsContainer{
+.allCommentsContainer {
     width: 40vw;
     height: 80vh;
     background: white;
@@ -133,7 +134,7 @@
     padding: 1.4rem;
 }
 
-.postCommentsContainer{
+.postCommentsContainer {
     position: absolute;
     bottom: 1.2rem;
     left: 1.2rem;
@@ -144,7 +145,7 @@
     gap: 1.2rem;
 }
 
-.postCommentsContainer>input{
+.postCommentsContainer>input {
     flex: 0.9;
     width: fit-content;
     padding-block: 1.2rem;
@@ -156,11 +157,11 @@
     outline: none;
 }
 
-.postCommentsContainer>input :focus{ 
+.postCommentsContainer>input :focus {
     border: 1px solid silver;
 }
 
-.postCommentsContainer_commentBtn{
+.postCommentsContainer_commentBtn {
     flex: 0.1;
     width: fit-content;
     padding: 1.2rem;
@@ -169,4 +170,26 @@
     color: white;
     background-color: rgb(245, 205, 76);
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .allCommentsContainer {
+        width: 90%;
+        height: 50svh;
+    }
+
+    .singleCard {
+        /* background-color: rgb(246, 241, 235); */
+        /* margin-left: 50px; */
+        padding-left: 10rem;
+        width: 100%;
+        /* border-radius: 10px; */
+        border-bottom: 1px solid rgb(95, 176, 247);
+    }
+
+    .createPostContainer {
+        margin-left: 5rem;
+        width: 100%;
+    }
+
 }

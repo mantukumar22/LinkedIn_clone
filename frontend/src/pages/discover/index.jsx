@@ -30,12 +30,15 @@ export default function Discoverpage() {
 
             <div className={styles.allUserProfile}>
 
-              {authState.all_profiles_fetched && authState.all_users.map((user) => {
+              {authState.all_profiles_fetched && authState.all_users.map(
+                (user) => { 
                 return (
                   <div onClick={() => {
                     router.push(`/view_profile/${user.userId.username}`)
                   }} key={user._id} className={styles.userCard}>
-                    <img className={styles.userCard_img} src={`${BASE_URL}/${user?.userId?.profilePicture}`} alt="" />
+                    <img className={styles.userCard_img} src={user?.userId?.profilePicture
+                    
+                      ? `${BASE_URL}/uploads/${user.userId.profilePicture} ` : `${BASE_URL}/uploads/default.jpg`} alt="" />
 
                     <div>
                       <h1>{user.userId.name}</h1>
