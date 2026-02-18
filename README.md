@@ -1,7 +1,7 @@
 ## Deployed links
 
-frontend : [https://linked-in-clone-2vhs.vercel.app/login]
-Backend : https://linkedin-clone-kb5b.onrender.com/
+frontend : https://linkedinclone-olive-delta.vercel.app
+Backend : https://linkedin-clone-kb5b.onrender.com
 Building start :--------
 
 ## Setup mongodb atlas-
